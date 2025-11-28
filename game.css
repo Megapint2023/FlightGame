@@ -1,0 +1,123 @@
+:root{
+}
+
+*{box-sizing: border-box}
+
+body{
+  margin:0;
+  background: #d7d7d7;
+  color: #000000;
+  min-height:100vh; /* täyttää sivun täyden mittaiseksi jos on tyhjää tilaa*/
+  display:flex;
+  flex-direction:column;
+}
+
+header{
+  height: 75px;
+  padding: 12px 20px;
+  background: #ad9019;
+}
+
+.button-top-right {
+  padding: 20px 20px;
+  margin-left: auto;
+}
+.button-top-right button {
+  padding: 15px 15px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+main {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 1.3fr 320px;
+  gap: 16px;
+
+}
+
+.card {
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+
+#map {
+  min-height: 700px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.sidebar {
+  padding: 5px;
+  display:flex;
+  flex-direction:column;
+  gap: 16px;
+}
+
+.panel {
+  padding: 12px;
+  min-height: 350px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.03);
+  background: #ad9019;
+  gap:8px;
+}
+
+.panel h2{
+  margin:0;
+  font-size: 1rem;
+  color: #000000;
+}
+
+.panel p{
+  margin:0;
+  font-size: 1rem;
+}
+
+/* INPUT */
+.input_box {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  min-height: 100px;
+  max-width: 70%;
+  margin: 16px 0;
+}
+
+.input_box input {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #000;
+}
+
+.input_box button {
+  padding: 16px 24px;
+  border-radius: 8px;
+}
+
+/* FOOTER */
+footer{
+  height: 75px;
+  background: #ad9019;
+}
+
+@media (max-width: 880px){
+  main{
+    grid-template-columns: 1fr;
+  }
+  #map{min-height:420px}
+  .sidebar{flex-direction:row; gap:12px;}
+  .panel{flex:1; min-height:160px}
+}
+
+@media (max-width:480px){
+  .sidebar{flex-direction:column}
+}

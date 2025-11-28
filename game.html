@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Flight game</title>
+  <link rel="stylesheet" href="game.css">
+</head>
+
+<body>
+
+  <header>
+    <h1>PLAYER NAME: </h1>
+  </header>
+
+<div class="button-top-right">
+  <button>BUTTON</button>
+</div>
+
+  <main>
+
+    <section id="map" class="card">
+      <strong>PELIKARTTA (MAP) </strong>
+    </section>
+
+    <aside class="sidebar">
+      <section id="panel_1" class="panel">
+        <h2>PELIN STATUS:</h2>
+        <p>TIME: [...]</p>
+        <p>MOVES LEFT: [...]</p>
+        <p>DISTANCE TRAVELLED: [...]</p>
+      </section>
+
+      <section id="panel_2" class="panel">
+        <h2>INFO & HINTS</h2>
+        <p>(Maiden liput)</p>
+      </section>
+    </aside>
+
+  </main>
+
+    <section class="input_box">
+    <input type="text" id="input_field" placeholder="Travel to: " />
+    <button id="input_button">GO!</button>
+  </section>
+
+  <footer>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
