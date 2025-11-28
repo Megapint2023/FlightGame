@@ -19,8 +19,9 @@
 
   <main>
 
-    <section id="map" class="card">
-      <strong>PELIKARTTA (MAP) </strong>
+  <!--  <section id="map" class="card"> -->
+      <section id="map" class="card">
+   <!--   <strong>PELIKARTTA (MAP) </strong> -->
     </section>
 
     <aside class="sidebar">
@@ -41,7 +42,7 @@
 
     <section class="input_box">
     <input type="text" id="input_field" placeholder="Travel to: " />
-    <button id="input_button">GO!</button>
+    <button id="input_button">MOVE!</button>
   </section>
 
   <footer>
@@ -50,6 +51,58 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+
+<script>
+const options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
+
+let map, marker;
+
+// MAP "alustus"
+function success(pos) {
+  const crd = pos.coords;
+  map = L.map('map').setView([crd.latitude, crd.longitude], 5);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  marker = L.marker([crd.latitude, crd.longitude]).addTo(map)
+           .bindPopup("I am here.")
+           .openPopup();
+}
+
+function error(err) { console.warn(err); }
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+
+// MOVE - nappi
+document.getElementById('input_button').addEventListener('click', async () => {
+  const query = document.getElementById('input_field').value;
+  if (!query) return;
+
+  // KÄYTTÄÄ NOMINATIM kordinaattien saamiseen
+  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
+  const response = await fetch(url);
+  const results = await response.json();
+
+  if (results.length === 0) {
+    alert("Location not found!");
+    return;
+  }
+
+  const { lat, lon } = results[0];
+  const newLatLng = [parseFloat(lat), parseFloat(lon)];
+
+  // siirtää PINNIN ja Kohdistaa karttaa keskelle
+  marker.setLatLng(newLatLng);
+  map.setView(newLatLng, 5);
+  marker.bindPopup(query).openPopup();
+});
+</script>
+
 </body>
 </html>
 
