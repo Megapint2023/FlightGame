@@ -104,7 +104,10 @@ main {
   padding: 16px 24px;
   border-radius: 8px;
 }
-
+#panel_2 {
+    max-height: 450px;
+    overflow-y: auto;
+}
 /* FOOTER */
 footer{
   height: 75px;

@@ -6,9 +6,9 @@ while not connection:
         yhteys = mysql.connector.connect(
             host='127.0.0.1',
             port=3306,
-            database=input("Database:"),
-            user=input("User: "),
-            password=input("Password"),
+            database='flight_game',
+            user='megapint',
+            password='wine',
             autocommit=True
             )
         connection = True
@@ -17,24 +17,24 @@ while not connection:
         connection = False
 # yleisiä kyselyitä varten, palauttaa arvon listana joissa alkiot monikkoja
 def database_query(query):
-    kursori = yhteys.sursor()
+    kursori = yhteys.cursor()
     kursori.execute(query)
     tulos = kursori.fetchall()
     return tulos
 # arvojen muuttamista varten, ei palauta mitään
 def database_update(query):
-    kursori = yhteys.sursor()
+    kursori = yhteys.cursor()
     kursori.execute(query)
     return
 # käyttö: jos haluaa vain ensimäisen arvon tulokseen, eli käytettävä vain jos haluaa yhden arvon
 def database_query_fetchone(query):
-    kursori = yhteys.sursor()
+    kursori = yhteys.cursor()
     kursori.execute(query)
     tulos = kursori.fetchone()
     return tulos
 # kysely jos on tarvetta tarkistaa löytyykö tieto esim
 def database_check_query(query):
-    kursori = yhteys.sursor()
+    kursori = yhteys.cursor()
     kursori.execute(query)
     tulos = kursori.fetchall()
     if kursori.rowcount > 0:

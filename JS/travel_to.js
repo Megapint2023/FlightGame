@@ -1,3 +1,5 @@
+'use strict';
+
 let map, marker;
 
 // Initialize map (same as before)
