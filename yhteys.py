@@ -9,7 +9,8 @@ while not connection:
             database='flight_game',
             user='megapint',
             password='wine',
-            autocommit=True
+            autocommit=True,
+            ssl_disabled=True
             )
         connection = True
     except:

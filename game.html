@@ -9,12 +9,6 @@
 </head>
 
 <body>
-  <div id="player-modal">
-    <form id="player-form">
-      <input type="text" placeholder="Player name" required>
-      <input type="submit" value="Start game">
-    </form>
-  </div>
 
   <header>
     <h1>FLIGHT GAME</h1>
@@ -32,14 +26,20 @@
 
     <aside class="sidebar">
       <section id="panel_1" class="panel">
-        <h2>PELIN STATUS:</h2>
-        <p>TIME: [...]</p>
-        <p>MOVES LEFT: [...]</p>
-        <p>DISTANCE TRAVELLED: [...]</p>
+        <h2>STATUS:</h2>
+        <p id="game_status"></p>
+        <p id="player_name">PLAYER:</p>
+        <p id="player_cash">CASH:</p>
+        <p id="player_points">POINTS:</p>
+        <p id="player_location">LOCATION:</p>
+        <p id="player_location_icao">ICAO:</p>
+        <p id="local_weather"> LOCAL WEATHER:</p>
+        <p id="total_distance_travelled">TOTAL KM'S:</p>
+        <p id="total_CO2">TOTAL CO2:</p>
       </section>
 
       <section id="panel_2" class="panel">
-        <h2>INFO & HINTS</h2>
+        <h2>VIHJE:</h2>
         <p>COUNTRY LIST:</p>
       </section>
     </aside>
@@ -51,12 +51,23 @@
     <button id="input_button">MOVE!</button>
   </section>
 
+  <!-- KYSYY PELAAJAN NIMI FORM (ei toimi vielä) -->
+    <div id="player-modal">
+    <form id="player-form">
+      <input type="text" placeholder="Player name" required>
+      <input type="submit" value="Start game">
+    </form>
+  </div>
+
   <footer>
   </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-<script src="JS/map.js"></script>
 <script src="JS/EU_maat.js"></script>
+<script src="JS/map.js"></script>
+<script src="JS/player.js"></script>
+<script src="JS/travel_to.js"></script>
+
 </body>
 </html>
 
