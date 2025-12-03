@@ -13,8 +13,8 @@ async function loadAirports() {
     airports.forEach(ap => {
         L.circleMarker([ap.lat, ap.lon], {
             radius: 6,
-            color: '#ff0',
-            fillColor: '#ff0',
+            color: '#000',
+            fillColor: '#0f0',
             fillOpacity: 0.8
         }).addTo(map)
           .bindPopup(`${ap.name} (${ap.icao})`);
@@ -86,8 +86,8 @@ async function handleMapClick(e) {
     const travelCost = Math.floor(Math.random() * (275 - 93 + 1)) + 93;
     gameState.cash -= travelCost;
     gameState.points += 1;
-    gameState.totalDistance += Math.floor(Math.random() * 1000); // placeholder km
-    gameState.totalCO2 += Math.floor(Math.random() * 100); // placeholder
+    gameState.totalDistance += Math.floor(Math.random() * 1000);
+    gameState.totalCO2 += Math.floor(Math.random() * 100);
     gameState.currentLocation = locationName;
 
     await fetchWeather(locationName);
@@ -99,33 +99,4 @@ function distance(lat1, lon1, lat2, lon2) {
   return Math.sqrt((lat1 - lat2)**2 + (lon1 - lon2)**2);
 }
 
-
-// INPUT NAPPI (jos haluaa syöttää matkakohteen)
-document.getElementById('input_button').addEventListener('click', async () => {
-    const query = document.getElementById('input_field').value;
-    if (!query) return;
-
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
-    const response = await fetch(url);
-    const results = await response.json();
-    if (results.length === 0) {
-        alert("Location not found!");
-        return;
-    }
-
-    const { lat, lon } = results[0];
-    marker.setLatLng([lat, lon]);
-    map.setView([lat, lon], 5);
-    marker.bindPopup(query).openPopup();
-
-    const travelCost = Math.floor(Math.random() * (275 - 93 + 1)) + 93;
-    gameState.cash -= travelCost;
-    gameState.points += 1;
-    gameState.totalDistance += Math.floor(Math.random() * 1000);
-    gameState.totalCO2 += Math.floor(Math.random() * 100);
-    gameState.currentLocation = query;
-
-    await fetchWeather(query);
-    updateStatusPanel();
-});
 navigator.geolocation.getCurrentPosition(success, error, options);
