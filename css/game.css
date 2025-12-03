@@ -93,8 +93,8 @@ main {
 
 .sidebar {
   padding: 5px;
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
@@ -104,18 +104,52 @@ main {
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.03);
   background: #ef393d;
-  gap:8px;
+  gap: 8px;
 }
 
-.panel h2{
-  margin:0;
+.panel h2 {
+  margin: 0;
   font-size: 1rem;
   color: #000000;
 }
 
-.panel p{
-  margin:0;
+.panel p {
+  margin: 0;
   font-size: 1rem;
+}
+
+#panel_1 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#panel_1 > h2 {
+  font-size: 22px;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+#panel_1 .stat {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+}
+
+#panel_1 .label {
+  font-weight: 600;
+  color: #002c36;
+  font-size: 14px;
+}
+
+#panel_1 .value {
+  font-weight: bold;
+  font-size: 15px;
+  color: #fff;
 }
 
 /* INPUT */
