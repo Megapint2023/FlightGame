@@ -43,6 +43,7 @@ function success(pos) {
         .bindPopup("I am here.")
         .openPopup();
 
+    updateNavigator(crd.latitude, crd.longitude);
     // Klikkaus kartalla
     map.on('click', handleMapClick);
 }
@@ -81,6 +82,7 @@ async function handleMapClick(e) {
     marker.setLatLng([nearest.lat, nearest.lon]);
     map.setView([nearest.lat, nearest.lon], 5);
     marker.bindPopup(locationName).openPopup();
+    updateNavigator(nearest.lat, nearest.lon);
 
     // PÄIVITTÄÄ PELIN STATUKSEN (panel_1)
     const travelCost = Math.floor(Math.random() * (275 - 93 + 1)) + 93;

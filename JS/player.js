@@ -33,7 +33,6 @@ window.addEventListener("DOMContentLoaded", () => {
     const nameInput = form.querySelector("input[type='text']");
     gameState.playerName = nameInput.value;
 
-    // Hide the modal
     modal.style.display = "none";
 
     updateStatusPanel();
