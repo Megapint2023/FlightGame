@@ -1,16 +1,18 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from yhteys import database_query
-
+from game import Game_stats
 app = Flask(__name__)
 CORS(app)
+game = Game_stats("Player")
 
-@app.route("/countries")
-def get_countries():
-    query = "SELECT name FROM country WHERE continent = 'EU' ORDER BY name;"
-    results = database_query(query)
-    country_list = [row[0] for row in results]
-    return jsonify(country_list)
+@app.route("/move", methods=["POST"])
+def move():
+    data = request.get_json()
+    icao = data.get("icao")
+    distance = data.get("distance")
+    result = game.move(icao, distance)
+    return jsonify(result)
 
 @app.route("/airports")
 def get_airports():
@@ -33,5 +35,11 @@ def get_airports():
     ]
     return jsonify(airport_list)
 
+@app.route("/countries")
+def get_countries():
+    query = "SELECT name FROM country WHERE continent = 'EU' ORDER BY name;"
+    results = database_query(query)
+    country_list = [row[0] for row in results]
+    return jsonify(country_list)
 if __name__ == "__main__":
     app.run(debug=True)

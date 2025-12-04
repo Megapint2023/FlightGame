@@ -3,7 +3,7 @@
 const options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
 let map, marker;
 
-// NOUTAA LENTOKENTTÄ PISTEET KARTALLE
+// NOUTAA LENTOKENTTÄ PISTEET NÄKYVIIN
 let airports = [];
 
 async function loadAirports() {
@@ -20,31 +20,31 @@ async function loadAirports() {
           .bindPopup(`${ap.name} (${ap.icao})`);
     });
 }
-// EUROOPAN RAJAUS (testissä)
+
+// KARTTA - ASETTAA EUROOPALLE NS. RAJAUKSEN
 const europeBounds = [[34, -25], [72, 45]];
 
-// KARTAN OMINAISUUDET
+// KARTTA "OSIO
 function success(pos) {
     const crd = pos.coords;
     map = L.map('map', { maxBounds: europeBounds }).setView([crd.latitude, crd.longitude], 5);
 
-    // HIENOMPI KARTTA (kuin google earth)
+    // HIENOMPI KARTTA (google earth)
     L.tileLayer(
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
       { attribution: 'Tiles &copy; Esri' }
     ).addTo(map);
 
-    // Funktiokutsu querylle -> lataa lentokentät
+    // FUNKTIO KUTSU -> QUERYN PALAUTETUT LENTOKENTÄT NÄKYVIIN
     loadAirports();
 
-    // Pelaajan markkeri
+    // PELAAJA PINNI
     marker = L.marker([crd.latitude, crd.longitude])
         .addTo(map)
         .bindPopup("Pelaaja")
         .openPopup();
 
     updateNavigator(crd.latitude, crd.longitude);
-    // Klikkaus kartalla
     map.on('click', handleMapClick);
 }
 
@@ -52,7 +52,7 @@ function error(err) {
   console.warn(err);
 }
 
-// OSA 2 KARTALLA KLIKKAAMINEN
+// KARTTA KLIKKAAMALLA LIIKKUMINEN
 async function handleMapClick(e) {
     const { lat, lng } = e.latlng;
 
@@ -66,8 +66,9 @@ async function handleMapClick(e) {
             minDist = d;
         }
     });
+    travel_to(nearest);
 
-    // Noutaa sijainnin (TYÖN ALLA)
+    // NÄYTTÄÄ PISTEINÄ SIJAINNIT KARTALLA
     const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${nearest.lat}&lon=${nearest.lon}`;
     const response = await fetch(url);
     const result = await response.json();
@@ -78,25 +79,14 @@ async function handleMapClick(e) {
         result.address?.country ||
         nearest.name;
 
-    // PÄIVITTÄÄ pinnin JA KESKITTÄÄ KARTAN
+    // PÄIVITTÄÄ PINNIN JA KESKITTÄÄ KARTAN
     marker.setLatLng([nearest.lat, nearest.lon]);
     map.setView([nearest.lat, nearest.lon], 5);
-    marker.bindPopup(locationName).openPopup();
+    marker.bindPopup(nearest.name).openPopup();
     updateNavigator(nearest.lat, nearest.lon);
 
-    // PÄIVITTÄÄ PELIN STATUKSEN (panel_1)
-    const travelCost = Math.floor(Math.random() * (275 - 93 + 1)) + 93;
-    gameState.cash -= travelCost;
-    gameState.points += 1;
-    gameState.totalDistance += Math.floor(Math.random() * 1000);
-    gameState.totalCO2 += Math.floor(Math.random() * 100);
-    gameState.currentLocation = locationName;
-
-    await fetchWeather(locationName);
-    updateStatusPanel();
 }
-
-// FUNKTIO ETÄISYYDEN LASKEMISEEN
+// KARTALLA LIIKKUMINEN
 function distance(lat1, lon1, lat2, lon2) {
   return Math.sqrt((lat1 - lat2)**2 + (lon1 - lon2)**2);
 }

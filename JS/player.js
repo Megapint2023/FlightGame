@@ -1,25 +1,20 @@
 'use strict';
 
-const gameState = {
-  playerName: "",
-  cash: 2500,
-  points: 0,
-  currentLocation: "Helsinki",
-  icao: "",
-  weather: "",
-  totalDistance: 0,
-  totalCO2: 0,
+const name = {
+  player_name: "",
 };
 
-function updateStatusPanel() {
-  document.getElementById("player_name").textContent = gameState.playerName;
-  document.getElementById("player_cash").textContent = gameState.cash;
-  document.getElementById("player_points").textContent = gameState.points;
-  document.getElementById("player_location").textContent = gameState.currentLocation;
-  document.getElementById("player_location_icao").textContent = gameState.icao;
-  document.getElementById("local_weather").textContent = gameState.weather;
-  document.getElementById("total_distance_travelled").textContent = gameState.totalDistance;
-  document.getElementById("total_CO2").textContent = gameState.totalCO2;
+function update_player_name() {
+  document.getElementById("player_name").textContent = name.player_name;
+}
+function update_stats(data) {
+    document.getElementById("player_cash").textContent = data.cash;
+    document.getElementById("player_points").textContent = data.points;
+    document.getElementById("player_location").textContent = data.location;
+    document.getElementById("player_location_icao").textContent = data.icao || "-";
+    document.getElementById("local_weather").textContent = data.weather || "-";
+    document.getElementById("total_distance").textContent = data.distance;
+    document.getElementById("total_CO2").textContent = data.consumtion;
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -31,10 +26,10 @@ window.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
 
     const nameInput = form.querySelector("input[type='text']");
-    gameState.playerName = nameInput.value;
+    name.player_name = nameInput.value;
 
     modal.style.display = "none";
 
-    updateStatusPanel();
+    update_player_name();
   });
 });
