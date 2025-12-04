@@ -40,7 +40,7 @@ function success(pos) {
     // Pelaajan markkeri
     marker = L.marker([crd.latitude, crd.longitude])
         .addTo(map)
-        .bindPopup("I am here.")
+        .bindPopup("Pelaaja")
         .openPopup();
 
     updateNavigator(crd.latitude, crd.longitude);
