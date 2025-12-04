@@ -18,7 +18,8 @@ def get_airports():
         "SELECT airport.name, airport.ident, airport.latitude_deg, airport.longitude_deg "
         "FROM airport "
         "JOIN country ON airport.iso_country = country.iso_country "
-        "WHERE airport.type = 'large_airport' AND country.continent = 'EU';"
+        "WHERE airport.type = 'large_airport' AND country.continent = 'EU' "
+        "AND country.iso_country != 'RU';"
     )
     results = database_query(query)
     airport_list = [
