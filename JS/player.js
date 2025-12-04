@@ -13,8 +13,8 @@ function update_stats(data) {
     document.getElementById("player_location").textContent = data.location;
     document.getElementById("player_location_icao").textContent = data.icao || "-";
     document.getElementById("local_weather").textContent = data.weather || "-";
-    document.getElementById("total_distance").textContent = data.distance;
-    document.getElementById("total_CO2").textContent = data.consumtion;
+    document.getElementById("total_distance").textContent = data.total_distance;
+    document.getElementById("total_CO2").textContent = data.total_consumption;
 }
 
 window.addEventListener("DOMContentLoaded", () => {

@@ -9,11 +9,11 @@ game = Game_stats("Player")
 @app.route("/move", methods=["POST"])
 def move():
     data = request.get_json()
+    print("MOVE ENDPOINT HIT:", data)
     icao = data.get("icao")
     distance = data.get("distance")
     result = game.move(icao, distance)
     return jsonify(result)
-
 @app.route("/airports")
 def get_airports():
     query = (
