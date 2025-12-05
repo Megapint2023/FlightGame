@@ -1,5 +1,4 @@
 import requests
-import json
 
 hakusana = input("Anna paikkakunta: ")
 api_key = "543cd516ab7095dab8faac0cf1a3731d"
