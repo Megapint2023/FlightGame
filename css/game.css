@@ -23,7 +23,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* above everything */
+  z-index: 9999;
 }
 
 #player-modal form {
@@ -58,30 +58,36 @@ header{
   color: #ef393d;
 }
 
-.button-top-right {
-  padding: 20px 20px;
-  margin-left: auto;
-}
-.button-top-right button {
-  padding: 15px 15px;
-  font-size: 1.2rem;
+/* HEADERING ALLA OLEVA ELEMNTTI (sijainnin mukaan päivittyvät)  */
+.sijainti {
+  padding: 10px;
+  font-size: 1.5rem;
   border-radius: 8px;
-  cursor: pointer;
+  border: 1px solid #000;
+  align-items: center;
+  display: flex;
+  gap: 10px;
 }
 
+.sijainti button {
+  margin-left: auto;
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-size: 1.5rem;
+}
 
+/* KARTTA JA PANEELIT OSIO */
 main {
   flex: 1 1 auto;
   display: grid;
   grid-template-columns: 1.3fr 320px;
   gap: 16px;
-
 }
 
 .card {
   border-radius: 12px;
   padding: 12px;
-  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+  box-shadow: 0 6px 18px #092633;
   border: 2px solid #135f85;
 }
 
@@ -103,6 +109,7 @@ main {
   min-height: 350px;
   border-radius: 10px;
   background: #ef393d;
+  box-shadow: 0 6px 18px #092633;
   color: #c8fff4;
   font-size: 22px;
   text-align: center;
@@ -156,7 +163,7 @@ main {
   color: #fff;
 }
 
-/* INPUT */
+/* LOPPUOSA ENNEN FOOTERIA - INPUT BAR ETC. */
 .input_box {
   display: flex;
   gap: 12px;
