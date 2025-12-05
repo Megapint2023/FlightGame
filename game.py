@@ -9,7 +9,6 @@ class Game_stats:
         self.current_location = "EFHK"   # start HEL (ICAO)
         self.suitcase_location = "LIRF"  # Rome example
         self.icao = ""
-        self.weather = ""
         self.total_distance = 0.0
         self.total_consumption = 0.0
         self.game_over = False
@@ -55,7 +54,6 @@ class Game_stats:
             "points": self.points,
             "location": self.current_location,
             "icao": self.icao,
-            "weather": self.weather,
             "total_distance": self.total_distance,
             "total_consumption": self.total_consumption,
             "game_over": self.game_over
@@ -69,7 +67,6 @@ class Game_stats:
             "location": self.current_location,
             "suitcase": self.suitcase_location,
             "icao": self.icao,
-            "weather": self.weather,
             "total_distance": self.total_distance,
             "total_consumption": self.total_consumption,
             "game_over": self.game_over

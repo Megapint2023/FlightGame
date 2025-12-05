@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from yhteys import database_query
 from game import Game_stats
+from weather import sää
 app = Flask(__name__)
 CORS(app)
 game = Game_stats("Player")
@@ -11,8 +12,15 @@ def move():
     data = request.get_json()
     icao = data.get("icao")
     distance = data.get("distance")
+    municipality = data.get("municipality")
     result = game.move(icao, distance)
+
+    if municipality:
+        result["location"] = municipality
+        weather = sää(municipality)
+        result["weather"] = weather
     return jsonify(result)
+
 @app.route("/airports")
 def get_airports():
     query = (

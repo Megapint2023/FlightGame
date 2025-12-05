@@ -6,12 +6,14 @@ function travel_to(airport) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             icao: airport.icao,
-            distance: 1000
+            distance: 1000,
+            municipality: airport.name
         })
     })
     .then(response => response.json())
     .then(data => {
         update_stats(data);
+        document.getElementById("weather").textContent = `Weather: ${data.weather}`;
     })
     .catch(err => console.error("Move failed:", err));
 }
