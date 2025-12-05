@@ -13,7 +13,7 @@ function travel_to(airport) {
     .then(response => response.json())
     .then(data => {
         update_stats(data);
-        document.getElementById("weather").textContent = `Weather: ${data.weather}`;
+        document.getElementById("weather").textContent = `WEATHER: ${data.weather}`;
     })
     .catch(err => console.error("Move failed:", err));
 }
