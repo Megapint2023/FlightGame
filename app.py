@@ -33,6 +33,7 @@ def move():
     # Tässä ** purkaa arvot -tupliksi-
 
 
+
 @app.route("/airports")
 def get_airports():
     query = (

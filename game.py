@@ -14,6 +14,7 @@ class Game_stats:
         self.game_over = False
         self.current_country = None
 
+
     def move(self, icao_code, distance_m, municipality=None, country=None):
         if self.game_over:
             return {"status": "ENDED", "message": "Game already over.", **self.game_stats()}
