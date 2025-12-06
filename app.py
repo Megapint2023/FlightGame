@@ -19,20 +19,19 @@ def move():
              "JOIN country ON airport.iso_country = country.iso_country "
              "WHERE airport.ident = %s"
              )
-    rows = database_query(query, (icao,))
-    municipality = rows[0][0]
-    country_code = rows[0][1]
-    result["location"] = municipality
-    result["country"] = country_code
-    result["location"] = municipality
-    if rows:
-        weather = sää(municipality)
-        result["weather"] = weather
-    else:
-        result["location"] = None
-        result["country"] = None
-        result["weather"] = None
-    return jsonify(result)
+    results = database_query(query, (icao,))
+    move_list = [
+        {
+            "location": row[0],
+            "country": row[1],
+            "weather": sää(row[0])
+        }
+        for row in results
+    ]
+    return jsonify({**result, **move_list[0]})
+    # Yhdistelmä (result) ja (move_list[0]);
+    # Tässä ** purkaa arvot -tupliksi-
+
 
 @app.route("/airports")
 def get_airports():

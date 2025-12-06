@@ -16,15 +16,15 @@ while not connection:
     except:
         print("\nERR: TARKISTA SYÖTETYT ARVOT")
         connection = False
-# yleisiä kyselyitä varten, palauttaa arvon listana joissa alkiot monikkoja
-def database_query(query, params=None):
+
+
+# Kysely mahdollistaa lisäparametrin käytön ja palauttaa kaikki rivit.
+# Jos lisäparametrille ri käyttöä -> palauttaa tyhjän tai tyhjän tuplen
+def database_query(query, params=()):
     kursori = yhteys.cursor()
-    if params:
-        kursori.execute(query, params)
-    else:
-        kursori.execute(query)
-    tulos = kursori.fetchall()
-    return tulos
+    kursori.execute(query, params)
+    return kursori.fetchall()
+
 # arvojen muuttamista varten, ei palauta mitään
 def database_update(query):
     kursori = yhteys.cursor()
