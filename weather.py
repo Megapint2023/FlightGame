@@ -10,6 +10,6 @@ def sää(municipality):
 
     if vastaus.status_code == 200:
         kelvin_temp = data["main"]["temp"]
-        celsius_temp = kelvin_temp - 273.15 # muuttaa noudetun celciouksiksi
+        celsius_temp = kelvin_temp - 273.15
         description = data["weather"][0]["description"]
         return {"city": municipality, "temp": celsius_temp, "description": description}

@@ -7,13 +7,19 @@ function travel_to(airport) {
         body: JSON.stringify({
             icao: airport.icao,
             distance: 1000,
-            municipality: airport.name
+
         })
     })
     .then(response => response.json())
     .then(data => {
+            const weather = data.weather;
+            const teksti = weather.wind ? `, wind ${weather.wind} m/s` : "";
+            document.getElementById("weather").innerText =
+                `WEATHER: ${weather.temp.toFixed(1)}°C, ${weather.description}${teksti}`;
         update_stats(data);
-        document.getElementById("weather").textContent = `WEATHER: ${data.weather}`;
     })
-    .catch(err => console.error("Move failed:", err));
+    .catch(error => {
+        console.error("Move failed:", error);
+        document.getElementById("weather").innerText = "Ei saatavilla...";
+    });
 }
