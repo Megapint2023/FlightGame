@@ -29,9 +29,6 @@ def move():
         for row in results
     ]
     return jsonify({**result, **move_list[0]})
-    # Yhdistelmä (result) ja (move_list[0]);
-    # Tässä ** purkaa arvot -tupliksi-
-
 
 
 @app.route("/airports")

@@ -1,4 +1,5 @@
 import random
+from yhteys import yhteys
 
 class Game_stats:
     def __init__(self, player_name="Player"):
@@ -14,33 +15,22 @@ class Game_stats:
         self.current_city = None
         self.current_country = None
 
-    # LAUKUN SIJAINNIN MÄÄRITELMÄ
-    def set_suitcase(self, icao_code):
-        self.suitcase_location = icao_code
-
-    # LAUKUN SIJAINNIN ARPOMINEN
+    # ARPOMINEN
     def random_suitcase_location(self, icao_list):
         self.suitcase_location = random.choice(icao_list)
 
     # TARKISTA / KORJAA / KYSY
-    def move(self, icao_code, distance_m, municipality=None, country=None):
+    def move(self, icao, distance_m, municipality=None, country=None):
+        if self.game_over:
+            return {"status": "ENDED", **self.stats()}
 
         #SIJAINNIN PÄIVITYS
-        self.current_location = icao_code
-        self.icao = icao_code
+        self.current_location = icao
+        self.icao = icao
         if municipality:
             self.current_city = municipality
         if country:
             self.current_country = country
-
-        # PISTE KUN LÖYTÄÄ SIJAINNIN
-        found = (icao_code == self.suitcase_location)
-        if found:
-            self.points += 1
-
-        # KM JA CO2 laskuri
-        self.total_distance += float(distance_m)
-        self.total_consumption += float(distance_m) * 0.0002
 
         # LIPUNHINTA (random joka lento/siirto)
         ticket_cost = random.randint(55, 200)
@@ -53,19 +43,21 @@ class Game_stats:
                 "message": "Not enough cash to fly.",
                 **self.stats()
             }
-        # PELIN PÄÄTTYMINEN
-        if self.game_over:
-            return {
-                "status": "ENDED",
-                "message": "Game already over.",
-                **self.stats()
-            }
+        # PISTEET
+        found = (icao == self.suitcase_location)
+        if found:
+            self.points += 1
+
+        # KM JA CO2 laskuri
+        self.total_distance += float(distance_m)
+        self.total_consumption += float(distance_m) * 0.0002
+
         # STATUS
         status = "OK"
         if found:
             status = "WIN"
         if self.game_over:
-            status = "LOSE"
+            status = "END"
         # PALAUTUS
         return {
             "status": status,
@@ -79,8 +71,7 @@ class Game_stats:
             "player": self.player,
             "cash": self.cash,
             "points": self.points,
-            "location": self.current_city,
-            "sijainti": self.current_location,
+            "location": self.current_city or self.current_location,
             "icao": self.icao,
             "total_distance": self.total_distance,
             "total_consumption": self.total_consumption,
