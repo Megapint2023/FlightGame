@@ -14,10 +14,12 @@ def move():
     distance = data.get("distance")
     result = game.move(icao, distance)
 
-    query = "SELECT municipality, iso_country FROM airport WHERE ident = %s"
+    query = ("SELECT airport.municipality, country.name "
+             "FROM airport "
+             "JOIN country ON airport.iso_country = country.iso_country "
+             "WHERE airport.ident = %s"
+             )
     rows = database_query(query, (icao,))
-    # CANCER FEST BEGINS HERE
-
     municipality = rows[0][0]
     country_code = rows[0][1]
     result["location"] = municipality
