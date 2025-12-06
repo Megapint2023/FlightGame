@@ -14,21 +14,28 @@ def move():
     distance = data.get("distance")
     result = game.move(icao, distance)
 
-    query = "SELECT municipality FROM airport WHERE ident = %s"
+    query = "SELECT municipality, iso_country FROM airport WHERE ident = %s"
     rows = database_query(query, (icao,))
+    # CANCER FEST BEGINS HERE
+
     municipality = rows[0][0]
+    country_code = rows[0][1]
     result["location"] = municipality
-    if municipality:
+    result["country"] = country_code
+    result["location"] = municipality
+    if rows:
         weather = sää(municipality)
         result["weather"] = weather
     else:
+        result["location"] = None
+        result["country"] = None
         result["weather"] = None
     return jsonify(result)
 
 @app.route("/airports")
 def get_airports():
     query = (
-        "SELECT airport.name, airport.ident, airport.latitude_deg, airport.longitude_deg "
+        "SELECT airport.name, airport.ident, airport.latitude_deg, airport.longitude_deg, country.name "
         "FROM airport "
         "JOIN country ON airport.iso_country = country.iso_country "
         "WHERE airport.type = 'large_airport' AND country.continent = 'EU' "
@@ -41,6 +48,7 @@ def get_airports():
             "icao": row[1],
             "lat": float(row[2]),
             "lon": float(row[3]),
+            "country": row[4]
         }
         for row in results
     ]

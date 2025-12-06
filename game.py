@@ -12,10 +12,16 @@ class Game_stats:
         self.total_distance = 0.0
         self.total_consumption = 0.0
         self.game_over = False
+        self.current_country = None
 
-    def move(self, icao_code, distance_m):
+    def move(self, icao_code, distance_m, municipality=None, country=None):
         if self.game_over:
             return {"status": "ENDED", "message": "Game already over.", **self.game_stats()}
+        self.current_location = icao_code
+        if municipality:
+            self.current_city = municipality
+        if country:
+            self.current_country = country
 
         ticket_cost = random.randint(55, 200)
 
@@ -56,7 +62,9 @@ class Game_stats:
             "icao": self.icao,
             "total_distance": self.total_distance,
             "total_consumption": self.total_consumption,
-            "game_over": self.game_over
+            "game_over": self.game_over,
+            "city": getattr(self, "current_city", None),
+            "country": getattr(self, "current_country", None),
         }
 
     def game_stats(self):
@@ -69,7 +77,9 @@ class Game_stats:
             "icao": self.icao,
             "total_distance": self.total_distance,
             "total_consumption": self.total_consumption,
-            "game_over": self.game_over
+            "game_over": self.game_over,
+            "city": getattr(self, "current_city", None),
+            "country": getattr(self, "current_country", None),
         }
 
     def new_suitcase_location(self):

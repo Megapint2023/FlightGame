@@ -15,6 +15,7 @@ function update_stats(data) {
     document.getElementById("player_location_icao").textContent = data.icao;
     document.getElementById("total_distance").textContent = data.total_distance;
     document.getElementById("total_CO2").textContent = data.total_consumption;
+    document.getElementById("player_country").textContent = data.country;
 }
 
 window.addEventListener("DOMContentLoaded", () => {
