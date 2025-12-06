@@ -12,13 +12,22 @@ def move():
     data = request.get_json()
     icao = data.get("icao")
     distance = data.get("distance")
-    municipality = data.get("municipality")
     result = game.move(icao, distance)
 
+    # 1. Fetch municipality
+    query = "SELECT municipality FROM airport WHERE ident = %s"
+    rows = database_query(query, (icao,))
+    municipality = rows[0][0] if rows else None
+
+    result["location"] = municipality  # This now shows CITY instead of airport name
+
+    # 2. Fetch weather
     if municipality:
-        result["location"] = municipality
         weather = sää(municipality)
         result["weather"] = weather
+    else:
+        result["weather"] = None
+
     return jsonify(result)
 
 @app.route("/airports")

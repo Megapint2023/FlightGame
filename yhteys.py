@@ -17,9 +17,12 @@ while not connection:
         print("\nERR: TARKISTA SYÖTETYT ARVOT")
         connection = False
 # yleisiä kyselyitä varten, palauttaa arvon listana joissa alkiot monikkoja
-def database_query(query):
+def database_query(query, params=None):
     kursori = yhteys.cursor()
-    kursori.execute(query)
+    if params:
+        kursori.execute(query, params)
+    else:
+        kursori.execute(query)
     tulos = kursori.fetchall()
     return tulos
 # arvojen muuttamista varten, ei palauta mitään

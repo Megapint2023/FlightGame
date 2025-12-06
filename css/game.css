@@ -15,8 +15,6 @@ body{
 /*PLAYER MODAL*/
 #player-modal {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.65);
@@ -30,7 +28,6 @@ body{
   background: #ef393d;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -111,7 +108,7 @@ main {
   background: #ef393d;
   box-shadow: 0 6px 18px #092633;
   color: #c8fff4;
-  font-size: 22px;
+  font-size: 25px;
   text-align: center;
   letter-spacing: 1px;
 }
@@ -120,20 +117,20 @@ main {
   display: flex;
   justify-content: space-between;
   padding: 8px 10px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #e37a7a;
+  border: 1px solid #092633;
   border-radius: 6px;
 }
 /*säädetty*/
 .label {
-  font-weight: 600;
+  font-weight: bold;
   color: #002c36;
-  font-size: 14px;
+  font-size: 12px;
 }
 /*säädetty*/
 .value {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 17px;
   color: #fff;
 }
 /*säädetty*/
