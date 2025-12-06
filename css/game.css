@@ -123,7 +123,7 @@ main {
   padding: 12px;
   min-height: 350px;
   border-radius: 10px;
-  background: #ef393d;
+  background: #092633;
   box-shadow: 0 6px 18px #092633;
   color: #c8fff4;
   font-size: 25px;
@@ -135,7 +135,7 @@ main {
   display: flex;
   justify-content: space-between;
   padding: 8px 10px;
-  background: #6eaf8e;
+  background: #d9a066;
   border: 1px solid #092633;
   border-radius: 6px;
 }
