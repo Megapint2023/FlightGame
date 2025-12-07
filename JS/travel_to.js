@@ -1,6 +1,6 @@
 'use strict';
 
-function travel_to(airport) {
+async function travel_to(airport) {
     fetch('http://127.0.0.1:5000/move', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -17,6 +17,9 @@ function travel_to(airport) {
             document.getElementById("weather").innerText =
                 `- ${weather.temp.toFixed(1)}°C, ${weather.description}${teksti}`;
         update_stats(data);
+//        updateHiddenLocation().then(() => {
+//            updateNavigator(playerLat, playerLon);
+//        });
     })
     .catch(error => {
         console.error("Move failed:", error);

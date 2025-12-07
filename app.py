@@ -61,3 +61,11 @@ def get_countries():
     return jsonify(country_list)
 if __name__ == "__main__":
     app.run(debug=True)
+
+@app.route("/current_suitcase")
+def current_suitcase():
+    icao = game.suitcase_location
+    query = "SELECT latitude_deg, longitude_deg FROM airport WHERE ident = %s"
+    result = database_query(query, (icao,))
+    lat, lon = result[0]
+    return jsonify({"lat": float(lat), "lon": float(lon), "icao": icao})
