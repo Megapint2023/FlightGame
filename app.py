@@ -6,7 +6,7 @@ from weather import sää
 app = Flask(__name__)
 CORS(app)
 game = Game_stats("Player")
-game.randomize_suitcase()
+game.suitcase()
 
 @app.route("/move", methods=["POST"])
 def move():

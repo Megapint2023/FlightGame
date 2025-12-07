@@ -16,11 +16,7 @@ class Game_stats:
         self.current_country = None
 
     # ARPOMINEN
-    def randomize_suitcase(self):
-        """
-        Pick a random ICAO from the same airport set we show on the map
-        (large EU airports, excluding RU). Sets self.suitcase_location.
-        """
+    def suitcase(self):
         query = (
             "SELECT airport.ident "
             "FROM airport "
@@ -65,7 +61,7 @@ class Game_stats:
         found = (icao == self.suitcase_location)
         if found:
             self.points += 1
-            self.randomize_suitcase()
+            self.suitcase()
 
         # KM JA CO2 laskuri
         self.total_distance += float(distance_m)
