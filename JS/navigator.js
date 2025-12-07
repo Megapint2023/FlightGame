@@ -1,6 +1,8 @@
 'use strict';
 
-const hiddenLocation = { lat: 41.9028, lon: 12.4964 };
+// const hiddenLocation = { lat: 41.9028, lon: 12.4964 };
+
+const hiddenLocation = null;
 
 function updateNavigator(playerLat, playerLon) {
     const dy = hiddenLocation.lat - playerLat;

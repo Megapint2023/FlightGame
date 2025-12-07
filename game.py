@@ -1,5 +1,5 @@
 import random
-from yhteys import yhteys
+from yhteys import database_query
 
 class Game_stats:
     def __init__(self, player_name="Player"):
@@ -7,7 +7,7 @@ class Game_stats:
         self.cash = 2500
         self.points = 0
         self.current_location = "EFHK"
-        self.suitcase_location = "LIRF"
+        self.suitcase_location = None
         self.icao = ""
         self.total_distance = 0.0
         self.total_consumption = 0.0
@@ -16,8 +16,26 @@ class Game_stats:
         self.current_country = None
 
     # ARPOMINEN
-    def random_suitcase_location(self, icao_list):
-        self.suitcase_location = random.choice(icao_list)
+    def randomize_suitcase(self):
+        """
+        Pick a random ICAO from the same airport set we show on the map
+        (large EU airports, excluding RU). Sets self.suitcase_location.
+        """
+        query = (
+            "SELECT airport.ident "
+            "FROM airport "
+            "JOIN country ON airport.iso_country = country.iso_country "
+            "WHERE airport.type = 'large_airport' AND country.continent = 'EU' "
+            "AND country.iso_country != 'RU';"
+        )
+        rows = database_query(query)
+        icaos = [r[0] for r in rows] if rows else []
+        if icaos:
+            self.suitcase_location = random.choice(icaos)
+            print(f"New suitcase location: {self.suitcase_location}")
+        else:
+            self.suitcase_location = None
+            print("Warning: no airports found for suitcase randomization.")
 
     # TARKISTA / KORJAA / KYSY
     def move(self, icao, distance_m, municipality=None, country=None):
@@ -47,6 +65,7 @@ class Game_stats:
         found = (icao == self.suitcase_location)
         if found:
             self.points += 1
+            self.randomize_suitcase()
 
         # KM JA CO2 laskuri
         self.total_distance += float(distance_m)
