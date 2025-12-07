@@ -37,7 +37,7 @@ class Game_stats:
         else:
             self.suitcase_location = None
 
-    # TYÖN ALLA!!!!!!!!!!!
+    # LASKEE KM ja CO2 "iha inqeesti"
     def get_distance_to(self, from_icao):
         if not from_icao or not self.current_location:
             return 0.0
@@ -55,7 +55,7 @@ class Game_stats:
             return float(results[0][0])
         return 0.0
 
-    # TARKISTA / KORJAA / KYSY
+    # PELIN LOGIIKKA
     def move(self, icao, municipality=None, country=None):
         if self.game_over:
             return {"status": "ENDED", **self.stats()}
@@ -86,7 +86,6 @@ class Game_stats:
             self.points += 1
             self.suitcase()
 
-
         # KM JA CO2 laskuri
         distance_m = self.get_distance_to(prev_location)
         self.total_distance += float(distance_m) / 1000
@@ -98,7 +97,7 @@ class Game_stats:
             status = "WIN"
         if self.game_over:
             status = "END"
-        # PALAUTUS
+        # STATUKSEN ALAUTUS
         return {
             "status": status,
             "ticket_cost": ticket_cost,
@@ -106,6 +105,7 @@ class Game_stats:
             **self.stats()
         }
 
+    # KOKO LUOKAN STATSIEN PALAUTUS
     def stats(self):
         return {
             "player": self.player,

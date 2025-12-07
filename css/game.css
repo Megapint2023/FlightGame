@@ -202,6 +202,22 @@ main {
   border-radius: 8px;
 }
 
+/* +1! EFFEKTI KUN SAA PISTEEN (pelattavuus käyttäjälle) */
+.point-gain {
+    position: fixed;
+    left: 50%;
+    top: 20%;
+    font-size: 90px;
+    font-weight: 600;
+    color: #ff0000;
+    opacity: 0;
+    transition: 0.8s ease-out;
+    z-index: 9999;
+}
+.point-gain.show {
+    opacity: 1;
+}
+
 /*FOOTER*/
 footer{
   height: 75px;

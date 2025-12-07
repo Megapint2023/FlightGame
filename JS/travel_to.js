@@ -21,6 +21,11 @@ async function travel_to(airport) {
 
         document.getElementById("weather").innerText = weatherText;
         update_stats(data);
+        if (data.found === true) {
+          const gain = document.getElementById("point_gain");
+          gain.classList.add("show");
+          setTimeout(() => gain.classList.remove("show"), 900);
+}
         await updateHiddenLocation();
         updateNavigator(airport.lat, airport.lon);
     })
