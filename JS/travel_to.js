@@ -6,7 +6,6 @@ async function travel_to(airport) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             icao: airport.icao,
-            distance: 1000,
         })
     })
     .then(response => response.json())

@@ -13,8 +13,8 @@ function update_stats(data) {
     document.getElementById("player_location").textContent = data.location;
     document.getElementById("player_sijainti").textContent = data.location;
     document.getElementById("player_location_icao").textContent = data.icao;
-    document.getElementById("total_distance").textContent = data.total_distance + " km";
-    document.getElementById("total_CO2").textContent = data.total_consumption.toFixed(3) + " t";
+    document.getElementById("total_distance").textContent = data.total_distance.toFixed(1) + " km";
+    document.getElementById("total_CO2").textContent = data.total_consumption.toFixed(1) + " t";
     document.getElementById("player_country").textContent = data.country;
 }
 

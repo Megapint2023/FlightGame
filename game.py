@@ -37,12 +37,31 @@ class Game_stats:
         else:
             self.suitcase_location = None
 
+    # TYÖN ALLA!!!!!!!!!!!
+    def get_distance_to(self, from_icao):
+        if not from_icao or not self.current_location:
+            return 0.0
+
+        query = (
+            f"SELECT ST_Distance_Sphere("
+            f"ST_GeomFromText(CONCAT('POINT(', a.longitude_deg, ' ', a.latitude_deg, ')'), 4326), "
+            f"ST_GeomFromText(CONCAT('POINT(', b.longitude_deg, ' ', b.latitude_deg, ')'), 4326)) "
+            f"FROM airport a, airport b "
+            f"WHERE a.ident = '{from_icao}' AND b.ident = '{self.current_location}';"
+        )
+
+        results = database_query(query)
+        if results and len(results) > 0 and results[0][0] is not None:
+            return float(results[0][0])
+        return 0.0
+
     # TARKISTA / KORJAA / KYSY
-    def move(self, icao, distance_m, municipality=None, country=None):
+    def move(self, icao, municipality=None, country=None):
         if self.game_over:
             return {"status": "ENDED", **self.stats()}
 
         #SIJAINNIN PÄIVITYS
+        prev_location = self.current_location
         self.current_location = icao
         self.icao = icao
         if municipality:
@@ -67,9 +86,11 @@ class Game_stats:
             self.points += 1
             self.suitcase()
 
+
         # KM JA CO2 laskuri
-        self.total_distance += float(distance_m)
-        self.total_consumption += float(distance_m) * 0.0002
+        distance_m = self.get_distance_to(prev_location)
+        self.total_distance += float(distance_m) / 1000
+        self.total_consumption += (float(distance_m) / 1000) * 0.0002
 
         # STATUS
         status = "OK"
