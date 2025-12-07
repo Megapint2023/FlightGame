@@ -28,10 +28,9 @@ class Game_stats:
         icaos = [r[0] for r in rows] if rows else []
         if icaos:
             self.suitcase_location = random.choice(icaos)
-            print(f"New suitcase location: {self.suitcase_location}")
+            print(f"Uusi sijainti: {self.suitcase_location}")
         else:
             self.suitcase_location = None
-            print("Warning: no airports found for suitcase randomization.")
 
     # TARKISTA / KORJAA / KYSY
     def move(self, icao, distance_m, municipality=None, country=None):
