@@ -68,7 +68,7 @@ async function handleMapClick(e) {
     });
     travel_to(nearest);
 
-    // NÄYTTÄÄ PISTEINÄ SIJAINNIT KARTALLA
+    // NÄYTTÄÄ PISTEINÄ SIJAINNIT KARTALLA (vihreät pisteet)
     const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${nearest.lat}&lon=${nearest.lon}`;
     const response = await fetch(url);
     const result = await response.json();
