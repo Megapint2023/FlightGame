@@ -7,19 +7,19 @@ async function travel_to(airport) {
         body: JSON.stringify({
             icao: airport.icao,
             distance: 1000,
-
         })
     })
     .then(response => response.json())
-    .then(data => {
-            const weather = data.weather;
-            const teksti = weather.wind ? `, wind ${weather.wind} m/s` : "";
-            document.getElementById("weather").innerText =
-                `- ${weather.temp.toFixed(1)}°C, ${weather.description}${teksti}`;
+    .then(async data => {
+        const weather = data.weather;
+        const teksti = weather.wind ? `, wind ${weather.wind} m/s` : "";
+
+        document.getElementById("weather").innerText =
+            `- ${weather.temp.toFixed(1)}°C, ${weather.description}${teksti}`;
+
         update_stats(data);
-//        updateHiddenLocation().then(() => {
-//            updateNavigator(playerLat, playerLon);
-//        });
+        await updateHiddenLocation();
+        updateNavigator(airport.lat, airport.lon);
     })
     .catch(error => {
         console.error("Move failed:", error);

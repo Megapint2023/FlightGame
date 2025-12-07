@@ -3,10 +3,12 @@ from flask_cors import CORS
 from yhteys import database_query
 from game import Game_stats
 from weather import sää
+
 app = Flask(__name__)
 CORS(app)
 game = Game_stats("Player")
 game.suitcase()
+
 
 @app.route("/move", methods=["POST"])
 def move():
@@ -18,8 +20,8 @@ def move():
     query = ("SELECT airport.municipality, country.name "
              "FROM airport "
              "JOIN country ON airport.iso_country = country.iso_country "
-             "WHERE airport.ident = %s"
-             )
+             "WHERE airport.ident = %s")
+
     results = database_query(query, (icao,))
     move_list = [
         {
@@ -31,10 +33,12 @@ def move():
     ]
     return jsonify({**result, **move_list[0]})
 
+
 @app.route("/airports")
 def get_airports():
     query = (
-        "SELECT airport.name, airport.ident, airport.latitude_deg, airport.longitude_deg, country.name "
+        "SELECT airport.name, airport.ident, airport.latitude_deg, "
+        "airport.longitude_deg, country.name "
         "FROM airport "
         "JOIN country ON airport.iso_country = country.iso_country "
         "WHERE airport.type = 'large_airport' AND country.continent = 'EU' "
@@ -53,19 +57,23 @@ def get_airports():
     ]
     return jsonify(airport_list)
 
-@app.route("/countries")
-def get_countries():
-    query = "SELECT name FROM country WHERE continent = 'EU' ORDER BY name;"
-    results = database_query(query)
-    country_list = [row[0] for row in results]
-    return jsonify(country_list)
-if __name__ == "__main__":
-    app.run(debug=True)
-
 @app.route("/current_suitcase")
 def current_suitcase():
     icao = game.suitcase_location
-    query = "SELECT latitude_deg, longitude_deg FROM airport WHERE ident = %s"
+    query = (
+        "SELECT latitude_deg, longitude_deg "
+        "FROM airport "
+        "WHERE ident = %s"
+    )
     result = database_query(query, (icao,))
     lat, lon = result[0]
-    return jsonify({"lat": float(lat), "lon": float(lon), "icao": icao})
+    suitcase_info = {
+        "icao": icao,
+        "lat": float(lat),
+        "lon": float(lon)
+    }
+    return jsonify(suitcase_info)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

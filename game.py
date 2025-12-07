@@ -4,7 +4,7 @@ from yhteys import database_query
 class Game_stats:
     def __init__(self, player_name="Player"):
         self.player = player_name
-        self.cash = 2500
+        self.cash = 5000
         self.points = 0
         self.current_location = "EFHK"
         self.suitcase_location = None
