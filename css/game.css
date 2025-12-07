@@ -209,12 +209,28 @@ main {
     top: 20%;
     font-size: 90px;
     font-weight: 600;
-    color: #ff0000;
+    color: #00ff0d;
     opacity: 0;
     transition: 0.8s ease-out;
     z-index: 9999;
 }
 .point-gain.show {
+    opacity: 1;
+}
+
+/* +1! EFFEKTI LENNON HINTA (pelattavuus ja visualisointi) */
+.lennonhinta {
+    position: fixed;
+    left: 15%;
+    top: 15%;
+    font-size: 70px;
+    font-weight: 600;
+    color: #ff0000;
+    opacity: 0;
+    transition: 0.8s ease-out;
+    z-index: 9999;
+}
+.lennonhinta.show {
     opacity: 1;
 }
 
