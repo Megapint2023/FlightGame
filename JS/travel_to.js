@@ -10,12 +10,16 @@ async function travel_to(airport) {
     })
     .then(response => response.json())
     .then(async data => {
-        const weather = data.weather;
-        const teksti = weather.wind ? `, wind ${weather.wind} m/s` : "";
 
-        document.getElementById("weather").innerText =
-            `- ${weather.temp.toFixed(1)}°C, ${weather.description}${teksti}`;
+        let weatherText = "- sää ei saatavilla...";
 
+        if (data.weather && data.weather.temp !== undefined) {
+            const w = data.weather;
+            const windText = (w.wind !== undefined) ? `, wind ${w.wind} m/s` : "";
+            weatherText = `- ${w.temp.toFixed(1)}°C, ${w.description}${windText}`;
+        }
+
+        document.getElementById("weather").innerText = weatherText;
         update_stats(data);
         await updateHiddenLocation();
         updateNavigator(airport.lat, airport.lon);

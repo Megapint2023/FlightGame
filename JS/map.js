@@ -22,7 +22,7 @@ async function loadAirports() {
 }
 
 // KARTTA - ASETTAA EUROOPALLE NS. RAJAUKSEN
-const europeBounds = [[34, -25], [72, 45]];
+const europeBounds = [[25, -25], [72, 45]];
 
 // KARTTA "OSIO
 function success(pos) {
