@@ -24,10 +24,15 @@ class Game_stats:
             "WHERE airport.type = 'large_airport' AND country.continent = 'EU' "
             "AND country.iso_country != 'RU';"
         )
-        rows = database_query(query)
-        icaos = [r[0] for r in rows] if rows else []
-        if icaos:
-            self.suitcase_location = random.choice(icaos)
+        results = database_query(query)
+        icao_list = [
+            {
+                "icao": row[0]
+            }
+            for row in results
+        ]
+        if icao_list:
+            self.suitcase_location = random.choice(icao_list)["icao"]
             print(f"Uusi sijainti: {self.suitcase_location}")
         else:
             self.suitcase_location = None

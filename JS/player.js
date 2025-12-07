@@ -8,13 +8,13 @@ function update_player_name() {
   document.getElementById("player_name").textContent = name.player_name;
 }
 function update_stats(data) {
-    document.getElementById("player_cash").textContent = data.cash;
+    document.getElementById("player_cash").textContent = data.cash + " €";
     document.getElementById("player_points").textContent = data.points;
     document.getElementById("player_location").textContent = data.location;
     document.getElementById("player_sijainti").textContent = data.location;
     document.getElementById("player_location_icao").textContent = data.icao;
-    document.getElementById("total_distance").textContent = data.total_distance;
-    document.getElementById("total_CO2").textContent = data.total_consumption;
+    document.getElementById("total_distance").textContent = data.total_distance + " km";
+    document.getElementById("total_CO2").textContent = data.total_consumption.toFixed(3) + " t";
     document.getElementById("player_country").textContent = data.country;
 }
 
