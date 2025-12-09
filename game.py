@@ -96,11 +96,11 @@ class Game_stats:
         self.total_consumption += (float(distance_m) / 1000) * 0.0002
 
         # STATUS
-        status = "jatkuu.."
+        status = "CONTINUE"
         if found:
-            status = "+1 piste"
+            status = "CONTINUE"
         if self.game_over:
-            status = "redirect -> gameover.html"
+            status = "END"
         # STATUKSEN ALAUTUS
         return {
             "status": status,
