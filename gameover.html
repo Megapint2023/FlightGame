@@ -5,15 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Flight game</title>
   <link rel="stylesheet" href="css/gameover.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
 </head>
 
-    <!--EFFEKTI KUN SAA PISTEEN (pelattavuus käyttäjälle) -->
-    <div id="point_gain" class="point-gain">+1</div>
-    <!--EFFEKTI KUN SIIRTYY - LIPUN HINTA (pelattavuus ja visualisointi) -->
-    <div id="lennonhinta" class="lennonhinta"></div>
 <body>
-
   <header>
     <h1>LOST SUITCASE</h1>
   </header>
@@ -21,25 +15,9 @@
 <div class="sijainti">
 
     <div class="sijainti-row">
-        <span class="sijainti-label">WELCOME TO:</span>
+        <span class="sijainti-label">HIGHSCORES:</span>
         <span id="flag" class="flag"></span>
     </div>
-
-    <div class="sijainti-row">
-        <span class="sijainti-label">COUNTRY:</span>
-        <span id="player_country" class="sijainti-value"></span>
-    </div>
-
-    <div class="sijainti-row">
-        <span class="sijainti-label">CITY:</span>
-        <span id="player_sijainti" class="sijainti-value"></span>
-    </div>
-
-    <div class="sijainti-row">
-        <span class="sijainti-label">WEATHER:</span>
-        <span id="weather" class="sijainti-value"></span>
-    </div>
-
     <button id="newgame_btn">NEW GAME</button>
 </div>
 
@@ -50,44 +28,9 @@
     <!-- PANEELIT 1 ja 2 -->
     <aside class="sidebar">
   <section id="panel_1" class="panel">
-    <h3>GAME STATUS</h3>
-    <div class="stat">
-      <p class="label">PLAYER:</p>
-      <p id="player_name" class="value"></p>
-    </div>
-    <div class="stat">
-      <p class="label">CASH:</p>
-      <p id="player_cash" class="value"></p>
-    </div>
-    <div class="stat">
-      <p class="label">POINTS:</p>
-      <p id="player_points" class="value"></p>
-    </div>
-    <div class="stat">
-      <p class="label">LOCATION:</p>
-      <p id="player_location" class="value"></p>
-    </div>
-    <div class="stat">
-      <p class="label">ICAO:</p>
-      <p id="player_location_icao" class="value"></p>
-    </div>
-    <div class="stat">
-      <p class="label">TOTAL KM'S:</p>
-      <p id="total_distance" class="value"></p>
-    </div>
-    <div class="stat">
-      <p class="label">TOTAL CO2:</p>
-      <p id="total_CO2" class="value"></p>
-    </div>
   </section>
 
-      <!-- PANEELI 2 - NAVIGAATTORI -->
 <section id="panel_2" class="panel">
-  <h3>NAVIGATOR</h3>
-  <div id="nav_wrapper">
-    <div id="nav_arrow"></div>
-    <p id="nav_text"></p>
-  </div>
 </section>
     </aside>
 
@@ -99,20 +42,10 @@
     <button id="input_button">BUTTON</button>
   </section>
 -->
-    <div id="player-modal">
-    <form id="player-form">
-      <input type="text" placeholder="Player name" required>
-      <input type="submit" value="Start game">
-    </form>
-  </div>
 
   <footer>
   </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-<!-- <script src="JS/EU_maat.js"></script> -->
-<script src="JS/navigator.js"></script>
-<script src="JS/map.js"></script>
 <script src="JS/player.js"></script>
 <script src="JS/travel_to.js"></script>
 
