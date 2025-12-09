@@ -15,6 +15,7 @@ class Game_stats:
         self.current_city = None
         self.current_country = None
 
+
     # ARPOMINEN
     def suitcase(self):
         query = (
@@ -75,11 +76,14 @@ class Game_stats:
         if self.cash < 55:
             self.cash = 0
             self.game_over = True
-            return {
-                "status": "LOSE",
-                "message": "Not enough cash to fly.",
-                **self.stats()
-            }
+            # TALLENTAA TULOKSEN TAULUUN HIGHSCORES
+            insert_query = (
+                "INSERT INTO highscores (name, points, total_km, total_co2) "
+                "VALUES (%s, %s, %s, %s);"
+            )
+            database_query(insert_query, (self.player, self.points, self.total_distance, self.total_consumption))
+            return {**self.stats()}
+
         # PISTEET
         found = (icao == self.suitcase_location)
         if found:
@@ -92,11 +96,11 @@ class Game_stats:
         self.total_consumption += (float(distance_m) / 1000) * 0.0002
 
         # STATUS
-        status = "OK"
+        status = "jatkuu.."
         if found:
-            status = "WIN"
+            status = "+1 piste"
         if self.game_over:
-            status = "END"
+            status = "redirect -> gameover.html"
         # STATUKSEN ALAUTUS
         return {
             "status": status,

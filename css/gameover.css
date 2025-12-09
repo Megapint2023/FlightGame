@@ -7,7 +7,7 @@ body{
   margin:0;
   background: #d7d7d7;
   color: #000000;
-  min-height:100vh; /* täyttää sivun täyden mittaiseksi jos on tyhjää tilaa*/
+  height: 100%; /* täyttää sivun täyden mittaiseksi jos on tyhjää tilaa*/
   display:flex;
   flex-direction:column;
 }
@@ -61,65 +61,36 @@ header{
     font-size: 1.1rem;
 }
 
-/* KARTTA JA PANEELIT OSIO */
-main {
-  flex: 1 1 auto;
-  display: grid;
-  grid-template-columns: 1.3fr 320px;
-  gap: 16px;
-}
-/* KARTAN IKKUNA */
+/* TABLE STYLING */
 .card {
   border-radius: 12px;
   padding: 12px;
   box-shadow: 0 6px 18px #092633;
   border: 2px solid #135f85;
-}
-/* KARTTA IKKUNAN SISÄLTÖ */
-#map {
-  height: 700px;
-  width: 100%;
-  position: relative;
-}
-/* OSIO PANEELIT 1 JA 2 STATUS JA NAVIGAATTORI */
-.sidebar {
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  background-color: #0e1e2b;
+  color: #d9a066;
+  max-width: 900px;
+  margin: 40px auto;
 }
 
-.panel {
-  padding: 12px;
-  min-height: 350px;
-  border-radius: 10px;
-  background: #092633;
-  box-shadow: 0 6px 18px #092633;
-  color: #c8fff4;
-  font-size: 25px;
+#highscore_table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+td {
+  padding: 30px;
   text-align: center;
-  letter-spacing: 1px;
-}
-/*Status paneelin sisältö*/
-.stat {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 10px;
-  background: #d9a066;
-  border: 1px solid #092633;
-  border-radius: 6px;
-}
-/*säädetty*/
-.label {
+  border-bottom: 1px solid #135f85;
   font-weight: bold;
-  font-size: 15px;
-  color: #002c36;
 }
-/*säädetty*/
-.value {
+th {
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
   font-weight: bold;
-  font-size: 17px;
-  color: #fff;
+  color: #ef393d;
+  border-bottom: 1px solid #135f85;
 }
 
 /*FOOTER*/
@@ -130,7 +101,7 @@ footer{
 
 @media (max-width: 880px){
   main{
-    grid-template-columns: 1fr;
+    flex: 1
   }
   #map{min-height:420px}
   .sidebar{flex-direction:row; gap:12px;}

@@ -6,10 +6,16 @@ async function travel_to(airport) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             icao: airport.icao,
+            player_name: name.player_name
         })
     })
     .then(response => response.json())
     .then(async data => {
+        // GAMEOVER REDIRECT HIGHSCORES SIVULLE
+        if (data.game_over) {
+        window.location.href = "gameover.html";
+        return;
+    }
         // SÄÄN PÄIVITTÄMINEN
         let weatherText = "- sää ei saatavilla...";
         if (data.weather && data.weather.temp !== undefined) {

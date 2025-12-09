@@ -12,18 +12,33 @@
     <h1>LOST SUITCASE</h1>
   </header>
 
+  <!--    -->
 <div class="sijainti">
-
     <div class="sijainti-row">
-        <span class="sijainti-label">HIGHSCORES:</span>
-        <span id="flag" class="flag"></span>
+        <span class="sijainti-label">TOP RESULTS:</span>
     </div>
     <button id="newgame_btn">NEW GAME</button>
 </div>
 
-  <!-- KARTTA + PANEELIT OSIO EROTELTUNA -->
+  <!-- HIGHSCORES TAULU -->
   <main>
-    <section id="map" class="card"></section>
+      <section id="highscores" class="card">
+    <h1>HIGHSCORES:</h1>
+    <table id="highscore_table">
+      <thead>
+        <tr>
+          <th>ID:</th>
+          <th>Player</th>
+          <th>Points</th>
+          <th>Total Distance (km)</th>
+          <th>Total CO2 (t)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- HIGHSCORES ammutaan tähän JS:llä -->
+      </tbody>
+    </table>
+  </section>
 
     <!-- PANEELIT 1 ja 2 -->
     <aside class="sidebar">
@@ -36,18 +51,10 @@
 
   </main>
 
-  <!--
-    <section class="input_box">
-    <input type="text" id="input_field" placeholder="TEMPORARELY DISABLED" />
-    <button id="input_button">BUTTON</button>
-  </section>
--->
-
   <footer>
   </footer>
 
-<script src="JS/player.js"></script>
-<script src="JS/travel_to.js"></script>
+<script src="JS/highscores_table.js"></script>
 
 </body>
 </html>

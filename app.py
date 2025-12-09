@@ -16,6 +16,8 @@ def move():
     icao = data.get("icao")
     distance = data.get("distance")
     result = game.move(icao, distance)
+    if "player_name" in data:
+        game.player = data["player_name"]
 
     query = ("SELECT airport.municipality, country.name "
              "FROM airport "
@@ -74,6 +76,25 @@ def current_suitcase():
     }
     return jsonify(suitcase_info)
 
+@app.route("/highscores")
+def get_highscores():
+    query = (
+        "SELECT name, points, total_km, total_co2 "
+        "FROM highscores "
+        "ORDER BY points DESC, total_km DESC "
+        "LIMIT 10;"
+    )
+    results = database_query(query)
+    highscores_list = [
+        {
+            "name": row[0],
+            "points": row[1],
+            "total_km": float(row[2]),
+            "total_co2": float(row[3])
+        }
+        for row in results
+    ]
+    return jsonify(highscores_list)
 
 if __name__ == "__main__":
     app.run(debug=True)
