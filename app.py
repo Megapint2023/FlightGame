@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, redirect
 from flask_cors import CORS
 from yhteys import database_query
 from game import Game_stats
@@ -95,6 +95,13 @@ def get_highscores():
         for row in results
     ]
     return jsonify(highscores_list)
+
+@app.route("/new_game")
+def new_game():
+    global game
+    game = Game_stats()
+    return redirect("/game.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)

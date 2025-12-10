@@ -95,7 +95,7 @@ class Game_stats:
         self.total_distance += float(distance_m) / 1000
         self.total_consumption += (float(distance_m) / 1000) * 0.0002
 
-        # STATUS
+        # STATUS (ei merkittävässä käytössä)
         status = "CONTINUE"
         if found:
             status = "CONTINUE"

@@ -12,13 +12,20 @@
     <h1>LOST SUITCASE</h1>
   </header>
 
-  <!--    -->
+  <!--  EI OLENNAISTA KÄYTTÖÄ TÄLLÄ SIVULLA  -->
 <div class="sijainti">
     <div class="sijainti-row">
         <span class="sijainti-label">TOP RESULTS:</span>
+
+      <!--  EI PELITÄ OIKEIN vielä, UUSI PELI -> RESTART FLASK  -->
     </div>
     <button id="newgame_btn">NEW GAME</button>
 </div>
+<script>
+document.getElementById("newgame_btn").addEventListener("click", () => {
+    window.location.href = "game.html";
+});
+</script>
 
   <!-- HIGHSCORES TAULU -->
   <main>
