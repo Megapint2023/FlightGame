@@ -96,6 +96,7 @@ def get_highscores():
     ]
     return jsonify(highscores_list)
 
+# TYÖN ALLA ... (uuden pelin käynnistystä varten täytyy käynnistää app uudelleen)
 @app.route("/new_game")
 def new_game():
     global game

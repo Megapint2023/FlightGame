@@ -1,4 +1,6 @@
-#LISTA - TIETOKANTAKYSELYT
+#!!!!!!  HUOM!!!!!! TÄMÄ TIEDOSTO ON VAIN LISTA - TIETOKANTAKYSELYISTÄ
+# TIETOAPANKKI
+# PELISSÄ KÄYTETTÄVÄT KYSELYT OVAT app.py:ssä
 
 # Kysely: jolla saadaan vihje missä maassa matkalaukku on ICAO:n avulla
 def query_country_hint(case_location):

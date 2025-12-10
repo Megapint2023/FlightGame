@@ -58,5 +58,5 @@ function triggerGameOver() {
 
     setTimeout(() => {
         window.location.href = "gameover.html";
-    }, 2000); // 2 sec delay
+    }, 2000);
 }
