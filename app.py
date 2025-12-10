@@ -82,7 +82,7 @@ def get_highscores():
         "SELECT name, points, total_km, total_co2 "
         "FROM highscores "
         "ORDER BY points DESC, total_km DESC "
-        "LIMIT 10;"
+        "LIMIT 16;"
     )
     results = database_query(query)
     highscores_list = [

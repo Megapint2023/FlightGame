@@ -97,6 +97,7 @@ th {
 footer{
   height: 75px;
   background: #092633;
+  hight: 100%;
 }
 
 @media (max-width: 880px){
