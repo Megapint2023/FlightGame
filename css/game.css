@@ -234,6 +234,41 @@ main {
     opacity: 1;
 }
 
+/* SIIRTYMIS ANIMAATIO */
+#fade_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*ANIMAATIO PELIRAHAN LOPUTTUA (hienompi transition) */
+#fade_overlay.show {
+  opacity: 1;
+}
+
+#game_over_text {
+  color: red;
+  font-size: 64px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  opacity: 0;
+  animation: textPop 1.5s forwards;
+}
+
+@keyframes textPop {
+  0% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 /*FOOTER*/
 footer{
   height: 75px;

@@ -13,7 +13,7 @@ async function travel_to(airport) {
     .then(async data => {
         // GAMEOVER REDIRECT HIGHSCORES SIVULLE
         if (data.game_over) {
-        window.location.href = "gameover.html";
+        triggerGameOver();
         return;
     }
         // SÄÄN PÄIVITTÄMINEN
@@ -46,4 +46,17 @@ async function travel_to(airport) {
         console.error("Move failed:", error);
         document.getElementById("weather").innerText = "- sää ei saatavilla...";
     });
+}
+
+function triggerGameOver() {
+    const overlay = document.createElement("div");
+    overlay.id = "fade_overlay";
+    overlay.innerHTML = '<h1 id="game_over_text">OUT OF CASH</h1>';
+    document.body.appendChild(overlay);
+
+    overlay.classList.add("show");
+
+    setTimeout(() => {
+        window.location.href = "gameover.html";
+    }, 2000); // 2 sec delay
 }

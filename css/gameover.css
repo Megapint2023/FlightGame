@@ -60,6 +60,19 @@ header{
     border-radius: 8px;
     font-size: 1.1rem;
 }
+/* PÖYDÄN ESITYSTAPA */
+#highscore_table {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: reveal 0.8s ease-out forwards;
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 /* TABLE STYLING */
 .card {
